@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const CompoundInterestCalculator = () => {
@@ -10,35 +10,13 @@ const CompoundInterestCalculator = () => {
     const [finalBalance, setFinalBalance] = useState(0);
     const [totalInvested, setTotalInvested] = useState(0);
 
-    const calculate = () => {
+    const calculate = useCallback(() => {
         const p = parseFloat(principal) || 0;
         const pm = parseFloat(monthlyContribution) || 0;
         const r = parseFloat(rate) / 100 || 0;
         const y = parseFloat(years) || 1;
 
-        let currentBalance = p;
-        let invested = p;
-        const newData = [];
-
-        for (let i = 0; i <= y; i++) {
-            newData.push({
-                year: i,
-                balance: Math.round(currentBalance),
-                invested: Math.round(invested),
-            });
-
-            // Compound for next year (monthly compounding approximation for simplicity or simple annual step? Let's do monthly for accuracy)
-            for (let m = 0; m < 12; m++) {
-                currentBalance += pm;
-                currentBalance *= (1 + r / 12);
-                invested += pm;
-            }
-        }
-
-        // Adjust last year slightly as the loop adds 12 more months after year 'y' in the last iteration logic above? 
-        // Actually, let's fix the loop. Year 0 is start.
-        // We want data points for Year 0, 1, ..., Y.
-
+        // Logic adjusted: chartData should start at year 0
         let chartData = [];
         let runningBalance = p;
         let runningInvested = p;
@@ -61,11 +39,11 @@ const CompoundInterestCalculator = () => {
         setData(chartData);
         setFinalBalance(runningBalance);
         setTotalInvested(runningInvested);
-    };
+    }, [principal, monthlyContribution, rate, years]);
 
     useEffect(() => {
         calculate();
-    }, [principal, monthlyContribution, rate, years]);
+    }, [principal, monthlyContribution, rate, years, calculate]); // Added calculate to dependency array
 
     return (
         <div className="calculator-card" style={{
