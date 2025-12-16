@@ -88,8 +88,8 @@ const NetSalaryCalculator = () => {
                     />
                 </div>
 
-                <div style={{ display: 'flex', gap: '16px' }}>
-                    <div style={{ flex: 1 }}>
+                <div className="flex-row-mobile" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                    <div style={{ flex: '1 1 140px' }}>
                         <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>Mensilità</label>
                         <select
                             value={months}
@@ -109,7 +109,7 @@ const NetSalaryCalculator = () => {
                             <option value={12}>12 Mensilità</option>
                         </select>
                     </div>
-                    <div style={{ flex: 1 }}>
+                    <div style={{ flex: '1 1 140px' }}>
                         <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>Regione</label>
                         <select
                             value={region}
@@ -144,7 +144,8 @@ const NetSalaryCalculator = () => {
                         fontSize: '1rem',
                         fontWeight: '600',
                         cursor: 'pointer',
-                        marginTop: '8px'
+                        marginTop: '8px',
+                        width: '100%'
                     }}
                 >
                     Calcola Netto

@@ -54,8 +54,8 @@ const CompoundInterestCalculator = () => {
             maxWidth: '800px',
             margin: '0 auto'
         }}>
-            <div className="input-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '32px' }}>
-                <div>
+            <div className="input-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '32px' }}>
+                <div style={{ flex: '1 1 200px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>Capitale Iniziale (€)</label>
                     <input
                         type="number"
@@ -64,7 +64,7 @@ const CompoundInterestCalculator = () => {
                         style={inputStyle}
                     />
                 </div>
-                <div>
+                <div style={{ flex: '1 1 200px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>Contributo Mensile (€)</label>
                     <input
                         type="number"
@@ -73,7 +73,7 @@ const CompoundInterestCalculator = () => {
                         style={inputStyle}
                     />
                 </div>
-                <div>
+                <div style={{ flex: '1 1 200px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>Interesse Annuo (%)</label>
                     <input
                         type="number"
@@ -82,7 +82,7 @@ const CompoundInterestCalculator = () => {
                         style={inputStyle}
                     />
                 </div>
-                <div>
+                <div style={{ flex: '1 1 200px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>Durata (Anni)</label>
                     <input
                         type="number"
@@ -94,11 +94,11 @@ const CompoundInterestCalculator = () => {
             </div>
 
             <div className="results-summary" style={{ display: 'flex', gap: '24px', marginBottom: '32px', flexWrap: 'wrap' }}>
-                <div style={{ flex: 1, padding: '20px', background: 'var(--bg-primary)', borderRadius: '8px', borderLeft: '4px solid #007aff' }}>
+                <div style={{ flex: '1 1 250px', padding: '20px', background: 'var(--bg-primary)', borderRadius: '8px', borderLeft: '4px solid #007aff' }}>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Saldo Finale</div>
                     <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>€ {Math.round(finalBalance).toLocaleString()}</div>
                 </div>
-                <div style={{ flex: 1, padding: '20px', background: 'var(--bg-primary)', borderRadius: '8px', borderLeft: '4px solid #34c759' }}>
+                <div style={{ flex: '1 1 250px', padding: '20px', background: 'var(--bg-primary)', borderRadius: '8px', borderLeft: '4px solid #34c759' }}>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Interesse Guadagnato</div>
                     <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#34c759' }}>€ {Math.round(finalBalance - totalInvested).toLocaleString()}</div>
                 </div>

@@ -89,13 +89,13 @@ const ExpenseSplitter = () => {
             {/* 1. Add People */}
             <div style={{ marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid var(--border-color)' }}>
                 <h4 style={{ marginBottom: '12px' }}>1. Coinmilini/Partecipanti</h4>
-                <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                     <input
                         type="text"
                         value={newPerson}
                         onChange={(e) => setNewPerson(e.target.value)}
                         placeholder="Nome (es. Marco)"
-                        style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
+                        style={{ flex: '1 1 200px', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
                     />
                     <button onClick={addPerson} style={{ padding: '0 20px', background: 'var(--bg-tertiary)', border: 'none', borderRadius: '8px', cursor: 'pointer', color: 'var(--text-primary)' }}>+</button>
                 </div>

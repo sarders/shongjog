@@ -6,7 +6,7 @@ const Culture = () => {
         <Section id="culture" title="Cultura">
             <div className="culture-grid" style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
                 gap: 'var(--spacing-xl)',
                 marginTop: 'var(--spacing-xl)'
             }}>
