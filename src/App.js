@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import StatisticsPage from './pages/StatisticsPage';
 import CulturePage from './pages/CulturePage';
 import EconomyPage from './pages/EconomyPage';
+import ProductsPage from './pages/ProductsPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/statistics" element={<StatisticsPage />} />
         <Route path="/culture" element={<CulturePage />} />
         <Route path="/economy" element={<EconomyPage />} />
+        <Route path="/tools" element={<ProductsPage />} />
       </Routes>
     </MainLayout>
   );

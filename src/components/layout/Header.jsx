@@ -46,6 +46,7 @@ const Header = () => {
                         <li><Link to="/statistics" className={location.pathname === '/statistics' ? 'active' : ''}>Statistica</Link></li>
                         <li><Link to="/culture" className={location.pathname === '/culture' ? 'active' : ''}>Cultura</Link></li>
                         <li><Link to="/economy" className={location.pathname === '/economy' ? 'active' : ''}>Economia</Link></li>
+                        <li><Link to="/tools" className={location.pathname === '/tools' ? 'active' : ''}>Strumenti</Link></li>
                     </ul>
                 </nav>
 
