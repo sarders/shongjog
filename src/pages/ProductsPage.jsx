@@ -2,6 +2,7 @@ import React from 'react';
 import Section from '../components/common/Section';
 import NetSalaryCalculator from '../components/tools/NetSalaryCalculator';
 import ExpenseSplitter from '../components/tools/ExpenseSplitter';
+import CompoundInterestCalculator from '../components/tools/CompoundInterestCalculator';
 
 const ProductsPage = () => {
     return (
@@ -14,6 +15,10 @@ const ProductsPage = () => {
 
             <Section id="salary-calculator" title="Calcolo Stipendio Netto">
                 <NetSalaryCalculator />
+            </Section>
+
+            <Section id="interest-calculator" title="Calcolatore Interesse Composto">
+                <CompoundInterestCalculator />
             </Section>
 
             <Section id="expense-splitter" title="Gestione Spese Casa">
