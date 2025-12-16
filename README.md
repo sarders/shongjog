@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Shongjog - Il Ponte per la Comunità Bangladese in Italia 🇮🇹🇧🇩
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Benvenuti nel repository ufficiale di **Shongjog**, un portale digitale dedicato all'integrazione, all'empowerment e al supporto della comunità bangladese in Italia.
 
-## Available Scripts
+## 🎯 La Nostra Missione
+La nostra missione è costruire uno strumento digitale che:
+- **Unisca** la comunità attraverso informazioni su cultura, eventi e associazioni.
+- **Supporti** l'integrazione economica e sociale con dati e strumenti utili.
+- **Valorizzi** il contributo culturale ed economico dei bangladesi in Italia.
 
-In the project directory, you can run:
+## 🤝 Open Source & Contributi
+Questo progetto è **Open Source** perché crediamo nella forza della collaborazione. 
+Chiunque voglia contribuire - sviluppatori, designer, traduttori o esperti di dati - è il benvenuto!
 
-### `npm start`
+Vogliamo creare un hub che appartenga alla comunità stessa. Se hai idee, vuoi aggiungere una funzionalità o correggere un bug, unisciti a noi.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Come Contribuire
+1.  Fai un **fork** del repository.
+2.  Clona il progetto in locale:
+    ```bash
+    git clone https://github.com/IL-TUO-USERNAME/shongjog.git
+    cd shongjog
+    ```
+3.  Installa le dipendenze:
+    ```bash
+    npm install
+    ```
+4.  Crea un nuovo branch per la tua feature:
+    ```bash
+    git checkout -b feature/la-mia-nuova-idea
+    ```
+5.  Avvia il server di sviluppo:
+    ```bash
+    npm start
+    ```
+6.  Fai commit delle tue modifiche e apri una **Pull Request**!
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Tecnologie Utilizzate
+- **React**: Framework UI principale.
+- **Recharts**: Per la visualizzazione dei dati e grafici.
+- **CSS Modules / Vanilla CSS**: Per uno styling pulito e moderno.
+- **GitHub Pages / Firebase**: Per il deployment.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Funzionalità Attuali
+- **Statistiche**: Dati ISTAT dettagliati su popolazione, lavoro e crescita.
+- **Cultura**: Sezione dedicata a eventi, Banglatown e associazionismo.
+- **Economia**: Focus su imprenditoria e rimesse.
+- **Strumenti**: Calcolatori utili (Stipendio Netto, Gestione Spese, Interesse Composto).
 
-### `npm run build`
+## 📬 Contatti
+Se vuoi saperne di più o hai domande, apri una Issue qui su GitHub o contattaci direttamente.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Shongjog: Connettere le persone, costruire il futuro.*
