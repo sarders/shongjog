@@ -8,6 +8,8 @@ const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
@@ -16,14 +18,30 @@ const Header = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Close menu when route changes
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [location]);
+
     return (
         <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
             <div className="container header-container">
-                <Link to="/" className="logo">
+                <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
                     Shongjog
                 </Link>
 
-                <nav className="nav">
+                {/* Mobile Menu Button */}
+                <button
+                    className={`mobile-menu-btn ${isMenuOpen ? 'active' : ''}`}
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle navigation"
+                >
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                </button>
+
+                <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
                     <ul className="nav-list">
                         <li><Link to="/statistics" className={location.pathname === '/statistics' ? 'active' : ''}>Statistica</Link></li>
                         <li><Link to="/culture" className={location.pathname === '/culture' ? 'active' : ''}>Cultura</Link></li>
