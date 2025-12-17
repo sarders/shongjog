@@ -31,7 +31,7 @@ const QuickNav = () => {
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [links]);
+    }, []);
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
