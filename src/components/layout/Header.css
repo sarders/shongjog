@@ -162,19 +162,22 @@
         /* Below header */
         padding-left: 40px;
         /* Apple-like left padding */
+
+        /* Initial State */
         transform: translateY(-100%);
-        /* Slide down like a shade, or fade */
         opacity: 0;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        /* Smooth apple-like ease */
+        pointer-events: none;
+        /* Prevent clicks when closed */
+
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         z-index: 1001;
-        visibility: hidden;
     }
 
     .nav.nav-open {
         transform: translateY(0);
         opacity: 1;
-        visibility: visible;
+        pointer-events: auto;
+        /* Enable clicks when open */
     }
 
     .nav-list {
@@ -183,6 +186,7 @@
         /* Left align items */
         gap: 2rem;
         width: 100%;
+        margin-top: 20px;
     }
 
     .nav-list a {
@@ -190,9 +194,13 @@
         /* Large typography */
         font-weight: 600;
         color: var(--text-primary);
+        display: block;
+        /* Ensure transform works */
+
+        /* Initial State for Items */
         opacity: 0;
         transform: translateY(-20px);
-        transition: all 0.3s ease;
+        transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .nav.nav-open .nav-list a {
@@ -206,10 +214,10 @@
     }
 
     .nav.nav-open .nav-list li:nth-child(2) a {
-        transition-delay: 0.2s;
+        transition-delay: 0.15s;
     }
 
     .nav.nav-open .nav-list li:nth-child(3) a {
-        transition-delay: 0.3s;
+        transition-delay: 0.2s;
     }
 }

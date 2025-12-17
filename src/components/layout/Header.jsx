@@ -30,6 +30,20 @@ const Header = () => {
                     Shongjog
                 </Link>
 
+                <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
+                    <ul className="nav-list">
+                        <li>
+                            <Link to="/statistics" onClick={() => setIsMenuOpen(false)}>Statistica</Link>
+                        </li>
+                        <li>
+                            <Link to="/economy" onClick={() => setIsMenuOpen(false)}>Economia</Link>
+                        </li>
+                        <li>
+                            <Link to="/tools" onClick={() => setIsMenuOpen(false)}>Strumenti</Link>
+                        </li>
+                    </ul>
+                </nav>
+
                 <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
                     {theme === 'light' ? '🌙' : '☀️'}
                 </button>
