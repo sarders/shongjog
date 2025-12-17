@@ -19,3 +19,16 @@
     opacity: 0.6;
     font-family: monospace;
 }
+/* GitHub Link Styles */
+.github-link {
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.github-link:hover {
+    color: var(--text-primary);
+}

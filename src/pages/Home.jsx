@@ -14,10 +14,9 @@ const Home = () => {
                     <li><Link to="/tools" className="home-link" style={{ color: 'var(--accent-color)', textDecoration: 'none', fontWeight: '700', fontSize: '1.1rem', background: 'var(--bg-secondary)', padding: '10px 20px', borderRadius: '20px' }}>Strumenti</Link></li>
                 </ul>
                 <div style={{ padding: '0 1rem' }}>
-                    <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                        Un progetto <strong>open source</strong> aperto alla collaborazione della community. <a href="https://github.com/sarders/shongjog" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link-color)' }}>Contribuisci su GitHub</a>
-                    </p>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Sviluppato sperimentando la metodologia <em>Vibecoding</em>.</p>
+                    <div style={{ padding: '0 1rem' }}>
+
+                    </div>
                 </div>
             </section>
         </>

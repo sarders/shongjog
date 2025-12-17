@@ -57,3 +57,50 @@
         font-size: 32px;
     }
 }
+/* Animated Description */
+.hero-description-anim {
+    margin-top: 2rem;
+    animation: fadeAndVanish 12s forwards; /* Visible for reading, then gone */
+}
+
+.hero-description-anim p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.hero-description-anim a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hero-description-anim a:hover {
+    text-decoration: underline;
+}
+
+.vibecoding-text {
+    font-size: 0.9rem !important;
+    opacity: 0.8;
+}
+
+@keyframes fadeAndVanish {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+    }
+}
