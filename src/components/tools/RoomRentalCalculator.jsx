@@ -113,26 +113,14 @@ const RoomRentalCalculator = () => {
     };
 
     return (
-        <div className="calculator-card" style={{
-            background: 'var(--bg-secondary)',
-            padding: 'var(--spacing-xl)',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px solid var(--border-color)',
-            maxWidth: '900px',
-            margin: '0 auto'
-        }}>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', textAlign: 'center' }}>
+        <div className="calculator-card room-rental-calculator">
+            <p className="calculator-subtitle">
                 Calcola il guadagno netto per ogni inquilino considerando tutte le spese
             </p>
 
-            <div className="input-grid" style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '16px',
-                marginBottom: '24px'
-            }}>
-                <div>
-                    <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+            <div className="input-grid">
+                <div className="input-group">
+                    <label>
                         Affitto per Letto (€/mese)
                     </label>
                     <input
@@ -140,20 +128,11 @@ const RoomRentalCalculator = () => {
                         value={rentPerBed}
                         onChange={(e) => setRentPerBed(e.target.value)}
                         placeholder="Es. 300"
-                        style={{
-                            width: '100%',
-                            padding: '12px',
-                            borderRadius: '8px',
-                            border: '1px solid var(--border-color)',
-                            background: 'var(--bg-primary)',
-                            color: 'var(--text-primary)',
-                            fontSize: '1rem'
-                        }}
                     />
                 </div>
 
-                <div>
-                    <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                <div className="input-group">
+                    <label>
                         Numero Inquilini
                     </label>
                     <input
@@ -162,20 +141,11 @@ const RoomRentalCalculator = () => {
                         onChange={(e) => setNumTenants(e.target.value)}
                         placeholder="Es. 4"
                         min="1"
-                        style={{
-                            width: '100%',
-                            padding: '12px',
-                            borderRadius: '8px',
-                            border: '1px solid var(--border-color)',
-                            background: 'var(--bg-primary)',
-                            color: 'var(--text-primary)',
-                            fontSize: '1rem'
-                        }}
                     />
                 </div>
 
-                <div>
-                    <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                <div className="input-group">
+                    <label>
                         Gas (€/mese)
                     </label>
                     <input
@@ -183,20 +153,11 @@ const RoomRentalCalculator = () => {
                         value={gasExpense}
                         onChange={(e) => setGasExpense(e.target.value)}
                         placeholder="Es. 50"
-                        style={{
-                            width: '100%',
-                            padding: '12px',
-                            borderRadius: '8px',
-                            border: '1px solid var(--border-color)',
-                            background: 'var(--bg-primary)',
-                            color: 'var(--text-primary)',
-                            fontSize: '1rem'
-                        }}
                     />
                 </div>
 
-                <div>
-                    <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                <div className="input-group">
+                    <label>
                         Acqua (€/mese)
                     </label>
                     <input
@@ -204,20 +165,11 @@ const RoomRentalCalculator = () => {
                         value={waterExpense}
                         onChange={(e) => setWaterExpense(e.target.value)}
                         placeholder="Es. 30"
-                        style={{
-                            width: '100%',
-                            padding: '12px',
-                            borderRadius: '8px',
-                            border: '1px solid var(--border-color)',
-                            background: 'var(--bg-primary)',
-                            color: 'var(--text-primary)',
-                            fontSize: '1rem'
-                        }}
                     />
                 </div>
 
-                <div>
-                    <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                <div className="input-group">
+                    <label>
                         Elettricità (€/mese)
                     </label>
                     <input
@@ -225,20 +177,11 @@ const RoomRentalCalculator = () => {
                         value={electricityExpense}
                         onChange={(e) => setElectricityExpense(e.target.value)}
                         placeholder="Es. 60"
-                        style={{
-                            width: '100%',
-                            padding: '12px',
-                            borderRadius: '8px',
-                            border: '1px solid var(--border-color)',
-                            background: 'var(--bg-primary)',
-                            color: 'var(--text-primary)',
-                            fontSize: '1rem'
-                        }}
                     />
                 </div>
 
-                <div>
-                    <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                <div className="input-group">
+                    <label>
                         Gestione/Pulizia (€/mese)
                     </label>
                     <input
@@ -246,33 +189,13 @@ const RoomRentalCalculator = () => {
                         value={managementCosts}
                         onChange={(e) => setManagementCosts(e.target.value)}
                         placeholder="Es. 40"
-                        style={{
-                            width: '100%',
-                            padding: '12px',
-                            borderRadius: '8px',
-                            border: '1px solid var(--border-color)',
-                            background: 'var(--bg-primary)',
-                            color: 'var(--text-primary)',
-                            fontSize: '1rem'
-                        }}
                     />
                 </div>
             </div>
 
             <button
+                className="calculate-btn"
                 onClick={calculateRental}
-                style={{
-                    padding: '14px',
-                    background: '#007aff',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    width: '100%',
-                    marginBottom: '24px'
-                }}
             >
                 Calcola Guadagno
             </button>
@@ -280,74 +203,37 @@ const RoomRentalCalculator = () => {
             {result && (
                 <div className="results-section">
                     {/* Key Metrics */}
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: '16px',
-                        marginBottom: '32px'
-                    }}>
-                        <div style={{
-                            background: 'var(--bg-primary)',
-                            padding: '20px',
-                            borderRadius: '8px',
-                            borderLeft: '4px solid #34c759'
-                        }}>
-                            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                                Profitto per Inquilino
-                            </div>
-                            <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#34c759' }}>
+                    <div className="results-grid">
+                        <div className="result-card" style={{ borderLeftColor: '#34c759' }}>
+                            <div className="result-label">Profitto per Inquilino</div>
+                            <div className="result-value" style={{ color: '#34c759' }}>
                                 €{result.netProfitPerTenant.toFixed(0)}
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginTop: '4px' }}>
-                                al mese
-                            </div>
+                            <div className="result-sub">al mese</div>
                         </div>
 
-                        <div style={{
-                            background: 'var(--bg-primary)',
-                            padding: '20px',
-                            borderRadius: '8px',
-                            borderLeft: '4px solid #007aff'
-                        }}>
-                            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                                Profitto Totale
-                            </div>
-                            <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                        <div className="result-card" style={{ borderLeftColor: '#007aff' }}>
+                            <div className="result-label">Profitto Totale</div>
+                            <div className="result-value" style={{ color: 'var(--text-primary)' }}>
                                 €{result.totalProfit.toFixed(0)}
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginTop: '4px' }}>
-                                al mese
-                            </div>
+                            <div className="result-sub">al mese</div>
                         </div>
 
-                        <div style={{
-                            background: 'var(--bg-primary)',
-                            padding: '20px',
-                            borderRadius: '8px',
-                            borderLeft: `4px solid ${getSatisfactionColor(result.satisfactionScore)}`
-                        }}>
-                            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                                Soddisfazione Inquilini
-                            </div>
-                            <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: getSatisfactionColor(result.satisfactionScore) }}>
+                        <div className="result-card" style={{ borderLeftColor: getSatisfactionColor(result.satisfactionScore) }}>
+                            <div className="result-label">Soddisfazione</div>
+                            <div className="result-value" style={{ color: getSatisfactionColor(result.satisfactionScore) }}>
                                 {result.satisfactionScore}/100
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginTop: '4px' }}>
-                                {getSatisfactionLabel(result.satisfactionScore)}
-                            </div>
+                            <div className="result-sub">{getSatisfactionLabel(result.satisfactionScore)}</div>
                         </div>
                     </div>
 
                     {/* Charts */}
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                        gap: '24px',
-                        marginBottom: '24px'
-                    }}>
+                    <div className="charts-grid">
                         {/* Profit Breakdown Bar Chart */}
-                        <div style={{ background: 'var(--bg-primary)', padding: '20px', borderRadius: '8px' }}>
-                            <h4 style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>Analisi Profitto per Inquilino</h4>
+                        <div className="chart-box">
+                            <h4 className="chart-title">Analisi Profitto per Inquilino</h4>
                             <ResponsiveContainer width="100%" height={250}>
                                 <BarChart data={result.profitData}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
@@ -367,7 +253,8 @@ const RoomRentalCalculator = () => {
                                         contentStyle={{
                                             backgroundColor: 'var(--bg-secondary)',
                                             borderColor: 'var(--border-color)',
-                                            borderRadius: '8px'
+                                            borderRadius: '8px',
+                                            color: 'var(--text-primary)'
                                         }}
                                         formatter={(value) => `€${Math.abs(value).toFixed(0)}`}
                                     />
@@ -384,8 +271,8 @@ const RoomRentalCalculator = () => {
                         </div>
 
                         {/* Expense Distribution Pie Chart */}
-                        <div style={{ background: 'var(--bg-primary)', padding: '20px', borderRadius: '8px' }}>
-                            <h4 style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>Distribuzione Spese</h4>
+                        <div className="chart-box">
+                            <h4 className="chart-title">Distribuzione Spese</h4>
                             <ResponsiveContainer width="100%" height={250}>
                                 <PieChart>
                                     <Pie
@@ -406,7 +293,8 @@ const RoomRentalCalculator = () => {
                                         contentStyle={{
                                             backgroundColor: 'var(--bg-secondary)',
                                             borderColor: 'var(--border-color)',
-                                            borderRadius: '8px'
+                                            borderRadius: '8px',
+                                            color: 'var(--text-primary)'
                                         }}
                                         formatter={(value) => `€${value.toFixed(0)}`}
                                     />
@@ -416,37 +304,33 @@ const RoomRentalCalculator = () => {
                     </div>
 
                     {/* Detailed Breakdown */}
-                    <div style={{
-                        background: 'var(--bg-primary)',
-                        padding: '20px',
-                        borderRadius: '8px'
-                    }}>
-                        <h4 style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>Dettaglio Spese per Inquilino</h4>
+                    <div className="breakdown-box">
+                        <h4 className="chart-title">Dettaglio Spese per Inquilino</h4>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--border-color)' }}>
+                            <div className="breakdown-row">
                                 <span style={{ color: 'var(--text-secondary)' }}>Utenze (Gas + Acqua + Elettricità):</span>
                                 <span style={{ fontWeight: '600' }}>€{result.utilityPerTenant.toFixed(2)}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--border-color)' }}>
+                            <div className="breakdown-row">
                                 <span style={{ color: 'var(--text-secondary)' }}>Usura Appartamento ({result.wearRate}%):</span>
                                 <span style={{ fontWeight: '600' }}>€{result.wearCostPerTenant.toFixed(2)}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--border-color)' }}>
+                            <div className="breakdown-row">
                                 <span style={{ color: 'var(--text-secondary)' }}>Gestione/Pulizia:</span>
                                 <span style={{ fontWeight: '600' }}>€{result.managementPerTenant.toFixed(2)}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px' }}>
+                            <div className="breakdown-row" style={{ borderBottom: 'none' }}>
                                 <span style={{ color: 'var(--text-secondary)', fontWeight: 'bold' }}>Totale Spese:</span>
                                 <span style={{ fontWeight: 'bold', color: '#ff3b30' }}>€{result.totalExpensesPerTenant.toFixed(2)}</span>
                             </div>
                         </div>
                     </div>
-
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)', marginTop: '16px', fontStyle: 'italic', textAlign: 'center' }}>
-                        * L'usura è calcolata automaticamente in base al numero di inquilini. La soddisfazione considera densità abitativa, peso delle utenze e affitto.
-                    </p>
                 </div>
             )}
+
+            <p className="calculator-note">
+                * L'usura è calcolata automaticamente in base al numero di inquilini. La soddisfazione considera densità abitativa, peso delle utenze e affitto.
+            </p>
         </div>
     );
 };

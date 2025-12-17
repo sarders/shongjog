@@ -1,0 +1,174 @@
+.room-rental-calculator {
+    background: var(--bg-secondary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.calculator-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.calculate-btn {
+    padding: 14px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 24px;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.calculate-btn:active {
+    transform: scale(0.98);
+}
+
+.calculate-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Results Section */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.result-card {
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+    border-left-width: 4px;
+    border-left-style: solid;
+}
+
+.result-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.result-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.result-sub {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.chart-box {
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.chart-title {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.breakdown-box {
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 8px;
+}
+
+.breakdown-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.calculator-note {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: 16px;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+    .room-rental-calculator {
+        padding: var(--spacing-md);
+        /* Less padding on mobile */
+        border: none;
+        /* Remove border on mobile for cleaner look */
+        background: transparent;
+        /* Seamless blend */
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+        /* Stack charts on mobile */
+    }
+
+    .chart-box,
+    .breakdown-box,
+    .result-card {
+        padding: 16px;
+        /* Optimized padding */
+    }
+}
