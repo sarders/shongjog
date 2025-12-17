@@ -41,12 +41,13 @@ const Header = () => {
                         <li>
                             <Link to="/tools" onClick={() => setIsMenuOpen(false)}>Strumenti</Link>
                         </li>
+                        <li>
+                            <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
+                                {theme === 'light' ? '🌙' : '☀️'}
+                            </button>
+                        </li>
                     </ul>
                 </nav>
-
-                <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-                    {theme === 'light' ? '🌙' : '☀️'}
-                </button>
 
                 {/* Mobile Menu Button - Moved to end for right alignment */}
                 <button
