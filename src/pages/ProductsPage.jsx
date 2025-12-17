@@ -9,7 +9,7 @@ import RoomRentalCalculator from '../components/tools/RoomRentalCalculator';
 const ProductsPage = () => {
     return (
         <div className="products-page">
-            <Section id="tools-intro" title="Strumenti Utili">
+            <Section id="tools-intro" title="Strumenti Utili" className="section-compact">
                 <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', color: 'var(--text-secondary)' }}>
                     Una raccolta di calcolatori e utility digitali progettati per semplificare la gestione quotidiana delle finanze e della vita in comune.
                 </p>

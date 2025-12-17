@@ -26,3 +26,8 @@
         font-size: var(--font-size-lg);
     }
 }
+
+.section-compact {
+    min-height: auto;
+    padding: var(--spacing-xl) 0;
+}
