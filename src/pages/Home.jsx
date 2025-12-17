@@ -15,9 +15,9 @@ const Home = () => {
                 </ul>
                 <div style={{ padding: '0 1rem' }}>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                        In questo progetto può lavorarci <strong>ciunique</strong>. <a href="https://github.com/sarders/shongjog" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link-color)' }}>GitHub</a>
+                        Un progetto <strong>open source</strong> aperto alla collaborazione della community. <a href="https://github.com/sarders/shongjog" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link-color)' }}>Contribuisci su GitHub</a>
                     </p>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Questo progetto è nato per provare <em>vibecoading</em>.</p>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Sviluppato sperimentando la metodologia <em>Vibecoding</em>.</p>
                 </div>
             </section>
         </>
