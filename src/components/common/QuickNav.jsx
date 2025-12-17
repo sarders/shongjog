@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './QuickNav.css';
 
+const links = [
+    { id: 'room-rental-calculator', label: 'Affitto' },
+    { id: 'salary-calculator', label: 'Stipendio' },
+    { id: 'interest-calculator', label: 'Interessi' },
+    { id: 'expense-splitter', label: 'Spese' },
+];
+
 const QuickNav = () => {
     const [activeSection, setActiveSection] = useState('');
-
-    const links = [
-        { id: 'room-rental-calculator', label: 'Affitto' },
-        { id: 'salary-calculator', label: 'Stipendio' },
-        { id: 'interest-calculator', label: 'Interessi' },
-        { id: 'expense-splitter', label: 'Spese' },
-    ];
 
     useEffect(() => {
         const handleScroll = () => {
