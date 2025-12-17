@@ -11,11 +11,12 @@ const Section = ({ id, title, children, className = '' }) => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
+                    observer.unobserve(element); // Stop observing once visible
                 }
             },
             {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
+                threshold: 0, // Trigger as soon as any part is visible
+                rootMargin: '0px 0px -50px 0px' // Slightly easier trigger than -100px
             }
         );
 
@@ -25,7 +26,7 @@ const Section = ({ id, title, children, className = '' }) => {
 
         return () => {
             if (element) {
-                observer.unobserve(element);
+                observer.disconnect();
             }
         };
     }, []);
