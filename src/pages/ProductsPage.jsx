@@ -14,6 +14,10 @@ const ProductsPage = () => {
                 </p>
             </Section>
 
+            <Section id="room-rental-calculator" title="Calcolatore Affitto Posto Letto">
+                <RoomRentalCalculator />
+            </Section>
+
             <Section id="salary-calculator" title="Calcolo Stipendio Netto">
                 <NetSalaryCalculator />
             </Section>
@@ -24,10 +28,6 @@ const ProductsPage = () => {
 
             <Section id="expense-splitter" title="Gestione Spese Casa">
                 <ExpenseSplitter />
-            </Section>
-
-            <Section id="room-rental-calculator" title="Calcolatore Affitto Posto Letto">
-                <RoomRentalCalculator />
             </Section>
         </div>
     );

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const RoomRentalCalculator = () => {
-    const [rentPerBed, setRentPerBed] = useState('');
-    const [numTenants, setNumTenants] = useState('');
-    const [gasExpense, setGasExpense] = useState('');
-    const [waterExpense, setWaterExpense] = useState('');
-    const [electricityExpense, setElectricityExpense] = useState('');
-    const [managementCosts, setManagementCosts] = useState('');
+    const [rentPerBed, setRentPerBed] = useState('300');
+    const [numTenants, setNumTenants] = useState('4');
+    const [gasExpense, setGasExpense] = useState('50');
+    const [waterExpense, setWaterExpense] = useState('30');
+    const [electricityExpense, setElectricityExpense] = useState('60');
+    const [managementCosts, setManagementCosts] = useState('40');
     const [result, setResult] = useState(null);
 
     const calculateRental = () => {
