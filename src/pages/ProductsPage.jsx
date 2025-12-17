@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from '../components/common/Section';
+import QuickNav from '../components/common/QuickNav';
 import NetSalaryCalculator from '../components/tools/NetSalaryCalculator';
 import ExpenseSplitter from '../components/tools/ExpenseSplitter';
 import CompoundInterestCalculator from '../components/tools/CompoundInterestCalculator';
@@ -13,6 +14,8 @@ const ProductsPage = () => {
                     Una raccolta di calcolatori e utility digitali progettati per semplificare la gestione quotidiana delle finanze e della vita in comune.
                 </p>
             </Section>
+
+            <QuickNav />
 
             <Section id="room-rental-calculator" title="Calcolatore Affitto Posto Letto">
                 <RoomRentalCalculator />
