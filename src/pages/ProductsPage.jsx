@@ -3,6 +3,7 @@ import Section from '../components/common/Section';
 import NetSalaryCalculator from '../components/tools/NetSalaryCalculator';
 import ExpenseSplitter from '../components/tools/ExpenseSplitter';
 import CompoundInterestCalculator from '../components/tools/CompoundInterestCalculator';
+import RoomRentalCalculator from '../components/tools/RoomRentalCalculator';
 
 const ProductsPage = () => {
     return (
@@ -23,6 +24,10 @@ const ProductsPage = () => {
 
             <Section id="expense-splitter" title="Gestione Spese Casa">
                 <ExpenseSplitter />
+            </Section>
+
+            <Section id="room-rental-calculator" title="Calcolatore Affitto Posto Letto">
+                <RoomRentalCalculator />
             </Section>
         </div>
     );
