@@ -30,7 +30,11 @@ const Header = () => {
                     Shongjog
                 </Link>
 
-                {/* Mobile Menu Button */}
+                <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
+                    {theme === 'light' ? '🌙' : '☀️'}
+                </button>
+
+                {/* Mobile Menu Button - Moved to end for right alignment */}
                 <button
                     className={`mobile-menu-btn ${isMenuOpen ? 'active' : ''}`}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -39,18 +43,6 @@ const Header = () => {
                     <span className="bar"></span>
                     <span className="bar"></span>
                     <span className="bar"></span>
-                </button>
-
-                <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
-                    <ul className="nav-list">
-                        <li><Link to="/statistics" className={location.pathname === '/statistics' ? 'active' : ''}>Statistica</Link></li>
-                        <li><Link to="/economy" className={location.pathname === '/economy' ? 'active' : ''}>Economia</Link></li>
-                        <li><Link to="/tools" className={location.pathname === '/tools' ? 'active' : ''}>Strumenti</Link></li>
-                    </ul>
-                </nav>
-
-                <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-                    {theme === 'light' ? '🌙' : '☀️'}
                 </button>
             </div>
         </header>

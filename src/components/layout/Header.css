@@ -135,9 +135,12 @@
 }
 
 /* Mobile Styles */
+/* Mobile Styles */
 @media (max-width: 768px) {
     .mobile-menu-btn {
         display: flex;
+        margin-left: 1rem;
+        /* Space from theme toggle */
     }
 
     .nav {
@@ -150,32 +153,63 @@
         height: 100vh;
         background-color: var(--bg-primary);
         display: flex;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        /* Slide from right */
-        transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        flex-direction: column;
+        justify-content: flex-start;
+        /* Align to top */
+        align-items: flex-start;
+        /* Align to left */
+        padding-top: 80px;
+        /* Below header */
+        padding-left: 40px;
+        /* Apple-like left padding */
+        transform: translateY(-100%);
+        /* Slide down like a shade, or fade */
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Smooth apple-like ease */
         z-index: 1001;
-        /* Layer between header(1000)+bg and controls(1002) */
         visibility: hidden;
-        /* Hide completely when closed */
     }
 
     .nav.nav-open {
-        transform: translateX(0);
+        transform: translateY(0);
+        opacity: 1;
         visibility: visible;
     }
 
     .nav-list {
         flex-direction: column;
-        align-items: center;
-        gap: 2.5rem;
+        align-items: flex-start;
+        /* Left align items */
+        gap: 2rem;
         width: 100%;
     }
 
     .nav-list a {
-        font-size: 1.75rem;
+        font-size: 2rem;
+        /* Large typography */
         font-weight: 600;
         color: var(--text-primary);
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+
+    .nav.nav-open .nav-list a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Staggered animation for list items */
+    .nav.nav-open .nav-list li:nth-child(1) a {
+        transition-delay: 0.1s;
+    }
+
+    .nav.nav-open .nav-list li:nth-child(2) a {
+        transition-delay: 0.2s;
+    }
+
+    .nav.nav-open .nav-list li:nth-child(3) a {
+        transition-delay: 0.3s;
     }
 }
