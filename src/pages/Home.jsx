@@ -6,17 +6,19 @@ const Home = () => {
     return (
         <>
             <Hero />
-            <section className="home-links" style={{ marginTop: '2rem', textAlign: 'center' }}>
-                <h2 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>Cosa offriamo</h2>
-                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
-                    <li><Link to="/statistics" className="home-link" style={{ color: 'var(--link-color)', textDecoration: 'none', fontWeight: '600' }}>Statistica</Link></li>
-                    <li><Link to="/economy" className="home-link" style={{ color: 'var(--link-color)', textDecoration: 'none', fontWeight: '600' }}>Economia</Link></li>
-                    <li><Link to="/tools" className="home-link" style={{ color: 'var(--link-color)', textDecoration: 'none', fontWeight: '600' }}>Strumenti</Link></li>
+            <section className="home-links" style={{ marginTop: '-15vh', position: 'relative', zIndex: 10, textAlign: 'center', paddingBottom: '4rem' }}>
+                <h2 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem', fontSize: '1.5rem' }}>Cosa offriamo</h2>
+                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+                    <li><Link to="/statistics" className="home-link" style={{ color: 'var(--accent-color)', textDecoration: 'none', fontWeight: '700', fontSize: '1.1rem', background: 'var(--bg-secondary)', padding: '10px 20px', borderRadius: '20px' }}>Statistica</Link></li>
+                    <li><Link to="/economy" className="home-link" style={{ color: 'var(--accent-color)', textDecoration: 'none', fontWeight: '700', fontSize: '1.1rem', background: 'var(--bg-secondary)', padding: '10px 20px', borderRadius: '20px' }}>Economia</Link></li>
+                    <li><Link to="/tools" className="home-link" style={{ color: 'var(--accent-color)', textDecoration: 'none', fontWeight: '700', fontSize: '1.1rem', background: 'var(--bg-secondary)', padding: '10px 20px', borderRadius: '20px' }}>Strumenti</Link></li>
                 </ul>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
-                    In questo progetto può lavorarci <strong>ciunique</strong>. <a href="https://github.com/sarders/shongjog" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link-color)' }}>GitHub</a>
-                </p>
-                <p style={{ color: 'var(--text-secondary)' }}>Questo progetto è nato per provare <em>vibecoading</em>.</p>
+                <div style={{ padding: '0 1rem' }}>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                        In questo progetto può lavorarci <strong>ciunique</strong>. <a href="https://github.com/sarders/shongjog" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link-color)' }}>GitHub</a>
+                    </p>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Questo progetto è nato per provare <em>vibecoading</em>.</p>
+                </div>
             </section>
         </>
     );
