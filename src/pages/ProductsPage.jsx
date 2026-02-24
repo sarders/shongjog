@@ -1,28 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Home, Banknote, TrendingUp, Calculator, Cloud } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import LoginPromptModal from '../components/common/LoginPromptModal';
 import './ProductsPage.css';
 
 const ProductsPage = () => {
     const { currentUser, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const handleCloudToolClick = async (e) => {
+    const handleCloudToolClick = (e) => {
         if (!currentUser) {
             e.preventDefault();
-            if (window.confirm("Per accedere a Spese Condivise è necessario prima effettuare l'accesso.\n\nVuoi accedere ora con Google?")) {
-                try {
-                    await loginWithGoogle();
-                    navigate('/shared-expenses');
-                } catch (error) {
-                    console.error("Errore di login:", error);
-                }
-            }
+            setIsLoginModalOpen(true);
+        }
+    };
+
+    const handleLoginFromModal = async () => {
+        try {
+            await loginWithGoogle();
+            setIsLoginModalOpen(false);
+            navigate('/shared-expenses');
+        } catch (error) {
+            console.error("Errore di login:", error);
         }
     };
 
@@ -79,6 +84,13 @@ const ProductsPage = () => {
                 </Link>
 
             </div>
+
+            {/* Modal di Login Autenticazione */}
+            <LoginPromptModal
+                isOpen={isLoginModalOpen}
+                onClose={() => setIsLoginModalOpen(false)}
+                onLogin={handleLoginFromModal}
+            />
         </div>
     );
 };
