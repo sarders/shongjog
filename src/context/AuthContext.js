@@ -4,7 +4,7 @@ import {
     signInWithPopup,
     signOut
 } from 'firebase/auth';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, googleProvider, db } from '../firebase';
 
 const AuthContext = createContext();
@@ -23,13 +23,22 @@ export function AuthProvider({ children }) {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
 
-            // Salva l'accesso su Firestore
+            // Salva l'accesso su Firestore nella cronologia
             await addDoc(collection(db, 'loginHistory'), {
                 uid: user.uid,
                 email: user.email,
                 displayName: user.displayName,
                 timestamp: serverTimestamp(),
             });
+
+            // Aggiorna/crea il documento dell'utente nella collezione globale 'users' (per poterlo cercare nel tool Spese)
+            await setDoc(doc(db, 'users', user.uid), {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                lastLogin: serverTimestamp(),
+            }, { merge: true });
 
             return user;
         } catch (error) {

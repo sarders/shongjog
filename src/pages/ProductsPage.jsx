@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Section from '../components/common/Section';
+import { Users } from 'lucide-react';
 import QuickNav from '../components/common/QuickNav';
 import NetSalaryCalculator from '../components/tools/NetSalaryCalculator';
 import ExpenseSplitter from '../components/tools/ExpenseSplitter';
@@ -13,6 +15,18 @@ const ProductsPage = () => {
                 <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', color: 'var(--text-secondary)' }}>
                     Una raccolta di calcolatori e utility digitali progettati per semplificare la gestione quotidiana delle finanze e della vita in comune.
                 </p>
+
+                {/* Banner per il nuovo strumento Cloud / Autenticato */}
+                <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center' }}>
+                    <Link to="/shared-expenses" style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '12px',
+                        backgroundColor: '#006a4e', color: 'white', padding: '16px 32px',
+                        borderRadius: '12px', textDecoration: 'none', fontWeight: 'bold', fontSize: '18px',
+                        boxShadow: '0 4px 12px rgba(0, 106, 78, 0.3)', transition: 'transform 0.2s'
+                    }}>
+                        <Users size={24} /> Entra in "Spese Condivise" (Beta)
+                    </Link>
+                </div>
             </Section>
 
             <QuickNav />

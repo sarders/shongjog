@@ -57,7 +57,14 @@ const Header = () => {
                             </li>
                         ) : (
                             <li>
-                                <button className="auth-btn login-btn" onClick={() => { loginWithGoogle(); setIsMenuOpen(false); }}>
+                                <button className="auth-btn login-btn" onClick={async () => {
+                                    try {
+                                        await loginWithGoogle();
+                                        setIsMenuOpen(false);
+                                    } catch (err) {
+                                        alert("Errore di accesso: " + err.message + "\nAssicurati di usare 'localhost' invece che un IP (192.x) o autorizza quest'ultimo su Firebase.");
+                                    }
+                                }}>
                                     <LogIn size={18} />
                                     <span>Accedi</span>
                                 </button>

@@ -7,6 +7,8 @@ import CulturePage from './pages/CulturePage';
 import EconomyPage from './pages/EconomyPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
+import SharedExpensesPage from './pages/SharedExpensesPage';
+import SharedAccountDetail from './pages/SharedAccountDetail';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
           <Route path="/economy" element={<EconomyPage />} />
           <Route path="/tools" element={<ProductsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/shared-expenses" element={<SharedExpensesPage />} />
+          <Route path="/shared-expenses/:id" element={<SharedAccountDetail />} />
         </Routes>
       </MainLayout>
     </AuthProvider>
