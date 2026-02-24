@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
+import { useAuth } from '../../context/AuthContext';
+import { User, LogIn } from 'lucide-react';
 import './Header.css';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
+    const { currentUser, loginWithGoogle } = useAuth();
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
 
@@ -41,6 +44,25 @@ const Header = () => {
                         <li>
                             <Link to="/tools" onClick={() => setIsMenuOpen(false)}>Strumenti</Link>
                         </li>
+                        {currentUser ? (
+                            <li>
+                                <Link to="/profile" className="auth-btn profile-btn" onClick={() => setIsMenuOpen(false)}>
+                                    {currentUser.photoURL ? (
+                                        <img src={currentUser.photoURL} alt="Profile" className="profile-img-small" />
+                                    ) : (
+                                        <User size={18} />
+                                    )}
+                                    <span>Profilo</span>
+                                </Link>
+                            </li>
+                        ) : (
+                            <li>
+                                <button className="auth-btn login-btn" onClick={() => { loginWithGoogle(); setIsMenuOpen(false); }}>
+                                    <LogIn size={18} />
+                                    <span>Accedi</span>
+                                </button>
+                            </li>
+                        )}
                         <li>
                             <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
                                 {theme === 'light' ? '🌙' : '☀️'}

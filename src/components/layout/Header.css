@@ -239,3 +239,63 @@
         justify-content: flex-start;
     }
 }
+
+/* Authentication Buttons */
+.auth-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-decoration: none;
+}
+
+.login-btn {
+    background-color: var(--primary-color, #006a4e);
+    color: white !important;
+}
+
+.login-btn:hover {
+    background-color: var(--primary-dark, #004d38);
+    transform: translateY(-2px);
+}
+
+.profile-btn {
+    background-color: var(--bg-tertiary, #f0f0f0);
+    color: var(--text-primary) !important;
+}
+
+.profile-btn:hover {
+    background-color: var(--bg-secondary, #e0e0e0);
+}
+
+.profile-img-small {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+[data-theme='dark'] .profile-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .nav-list .auth-btn {
+        width: 100%;
+        font-size: 1.5rem;
+        padding: 12px 20px;
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
+
+    .nav-list .profile-img-small {
+        width: 32px;
+        height: 32px;
+    }
+}
