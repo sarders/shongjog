@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { collection, query, where, getDocs, addDoc, serverTimestamp, doc, getDoc, onSnapshot, orderBy } from 'firebase/firestore';
+import { collection, query, where, addDoc, serverTimestamp, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 import { ArrowLeft, Plus, Receipt, TrendingUp, TrendingDown, CheckCircle } from 'lucide-react';
@@ -105,7 +105,7 @@ const SharedAccountDetail = () => {
     // Calcolo debiti
     const otherUserId = account.members.find(uid => uid !== currentUser.uid);
     const otherUser = account.memberDetails[otherUserId];
-    const myUser = account.memberDetails[currentUser.uid];
+
 
     let myTotal = 0;
     let otherTotal = 0;
