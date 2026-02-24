@@ -47,7 +47,7 @@ const ProductsPage = () => {
                         <Cloud size={32} />
                     </div>
                     <h2>Spese Condivise</h2>
-                    <p>Crea un conto in tempo reale con i tuoi amici. Tieni traccia di tutte le spese e scopri automaticamente chi deve cosa a chi senza fare matematica.</p>
+                    <p>Crea un conto in tempo reale con i tuoi amici. Tieni traccia di tutte le spese e scopri automaticamente chi deve cosa a chi senza fare conti.</p>
                 </Link>
 
                 {/* Strumenti Locali */}
