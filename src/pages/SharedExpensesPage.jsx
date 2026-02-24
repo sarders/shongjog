@@ -16,6 +16,7 @@ const SharedExpensesPage = () => {
     const [searchResult, setSearchResult] = useState(null);
     const [searchError, setSearchError] = useState('');
     const [pendingEmailInvite, setPendingEmailInvite] = useState('');
+    const [showInviteSuccess, setShowInviteSuccess] = useState(false);
 
     useEffect(() => {
         if (!currentUser) return;
@@ -58,6 +59,7 @@ const SharedExpensesPage = () => {
         setSearchError('');
         setSearchResult(null);
         setPendingEmailInvite('');
+        setShowInviteSuccess(false);
 
         if (searchEmail.toLowerCase() === currentUser.email.toLowerCase()) {
             setSearchError("Non puoi creare un conto con te stesso!");
@@ -136,25 +138,28 @@ const SharedExpensesPage = () => {
             };
 
             await addDoc(collection(db, 'sharedAccounts'), newAccount);
-
-            // Genera il link mailto
-            const subject = encodeURIComponent("Unisciti a me su Shongjog per le Spese Condivise!");
-            const body = encodeURIComponent(
-                `Ciao!\n\nTi ho appena aggiunto a un conto per tracciare le nostre spese condivise su Shongjog.\n\n` +
-                `Per vedere il conto e aggiungere le tue spese, effettua l'accesso con Google da qui:\n` +
-                `https://shongjog.it/tools\n\n` +
-                `A presto!\n${currentUser.displayName}`
-            );
-            window.location.href = `mailto:${pendingEmailInvite}?subject=${subject}&body=${body}`;
-
-            setIsCreateModalOpen(false);
-            setSearchEmail('');
-            setPendingEmailInvite('');
             fetchAccounts();
+
+            // Mostriamo la modale di successo
+            setShowInviteSuccess(true);
         } catch (error) {
             console.error("Errore nella creazione del conto in attesa:", error);
             alert("Errore durante la creazione del conto in attesa.");
         }
+    };
+
+    const copyInviteText = () => {
+        const text = `Ciao! Ti ho appena aggiunto a un conto per tracciare le nostre spese condivise su Shongjog.\n\n` +
+            `Per vedere il conto e aggiungere le tue spese registrati da qui usando la tua email (${pendingEmailInvite}):\n` +
+            `https://shongjog.it/tools\n\n` +
+            `A presto!\n${currentUser.displayName}`;
+        navigator.clipboard.writeText(text);
+        alert("Messaggio copiato negli appunti! Inviagli questo messaggio su WhatsApp o via Email.");
+
+        setIsCreateModalOpen(false);
+        setSearchEmail('');
+        setPendingEmailInvite('');
+        setShowInviteSuccess(false);
     };
 
     if (!currentUser) return <Navigate to="/" />;
@@ -271,89 +276,122 @@ const SharedExpensesPage = () => {
                 }}>
                     <div style={{
                         backgroundColor: 'var(--bg-primary)', borderRadius: '16px', padding: '30px',
-                        width: '100%', maxWidth: '400px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+                        width: '100%', maxWidth: '420px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
                     }}>
-                        <h2 style={{ margin: '0 0 20px', color: 'var(--text-primary)', fontSize: '20px' }}>Nuovo Conto Condiviso</h2>
-                        <form onSubmit={handleSearchUser}>
-                            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '14px' }}>
-                                Email dell'utente con cui condividere le spese:
-                            </label>
-                            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                                <input
-                                    type="email"
-                                    value={searchEmail}
-                                    onChange={(e) => setSearchEmail(e.target.value)}
-                                    placeholder="email@esempio.com"
-                                    required
-                                    style={{
-                                        flex: 1, padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '16px'
-                                    }}
-                                />
-                                <button type="submit" style={{
-                                    backgroundColor: 'var(--bg-secondary)', border: 'none', borderRadius: '8px', padding: '0 16px', cursor: 'pointer'
-                                }}>
-                                    <Search size={20} color="#555" />
-                                </button>
-                            </div>
-                        </form>
+                        {!showInviteSuccess ? (
+                            <>
+                                <h2 style={{ margin: '0 0 20px', color: 'var(--text-primary)', fontSize: '20px' }}>Nuovo Conto Condiviso</h2>
+                                <form onSubmit={handleSearchUser}>
+                                    <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '14px' }}>
+                                        Email dell'utente con cui condividere le spese:
+                                    </label>
+                                    <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                                        <input
+                                            type="email"
+                                            value={searchEmail}
+                                            onChange={(e) => setSearchEmail(e.target.value)}
+                                            placeholder="email@esempio.com"
+                                            required
+                                            style={{
+                                                flex: 1, padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '16px'
+                                            }}
+                                        />
+                                        <button type="submit" style={{
+                                            backgroundColor: 'var(--bg-secondary)', border: 'none', borderRadius: '8px', padding: '0 16px', cursor: 'pointer'
+                                        }}>
+                                            <Search size={20} color="#555" />
+                                        </button>
+                                    </div>
+                                </form>
 
-                        {searchError && <p style={{ color: 'red', fontSize: '14px', margin: '0 0 16px' }}>{searchError}</p>}
+                                {searchError && <p style={{ color: 'red', fontSize: '14px', margin: '0 0 16px' }}>{searchError}</p>}
 
-                        {searchResult && (
-                            <div style={{
-                                backgroundColor: '#f0f9f6', border: '1px solid #cce8de', borderRadius: '8px',
-                                padding: '16px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px'
-                            }}>
-                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#006a4e', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                                    {searchResult.photoURL ? <img src={searchResult.photoURL} alt="" style={{ width: '100%', height: '100%' }} /> : <UserPlus size={20} />}
+                                {searchResult && (
+                                    <div style={{
+                                        backgroundColor: '#f0f9f6', border: '1px solid #cce8de', borderRadius: '8px',
+                                        padding: '16px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px'
+                                    }}>
+                                        <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#006a4e', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                                            {searchResult.photoURL ? <img src={searchResult.photoURL} alt="" style={{ width: '100%', height: '100%' }} /> : <UserPlus size={20} />}
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <p style={{ margin: 0, fontWeight: 'bold', color: '#006a4e' }}>{searchResult.displayName}</p>
+                                            <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)' }}>Trovato!</p>
+                                        </div>
+                                        <button
+                                            onClick={handleCreateAccount}
+                                            style={{
+                                                backgroundColor: '#006a4e', color: '#ffffff', border: 'none',
+                                                borderRadius: '6px', padding: '8px 16px', cursor: 'pointer', fontWeight: 'bold'
+                                            }}
+                                        >
+                                            Crea
+                                        </button>
+                                    </div>
+                                )}
+
+                                {pendingEmailInvite && (
+                                    <div style={{
+                                        backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px',
+                                        padding: '16px', marginBottom: '20px', textAlign: 'center'
+                                    }}>
+                                        <p style={{ margin: '0 0 12px 0', color: 'var(--text-primary)', fontSize: '15px' }}>
+                                            <strong>{pendingEmailInvite}</strong> non è ancora registrato su Shongjog.
+                                        </p>
+                                        <p style={{ margin: '0 0 16px 0', color: 'var(--text-secondary)', fontSize: '14px' }}>
+                                            Crea il conto in sospeso. L'app genererà un messaggio di invito che potrai copiare e inviare comodamente alla sua email o su WhatsApp!
+                                        </p>
+                                        <button
+                                            onClick={handleCreatePendingAccount}
+                                            style={{
+                                                width: '100%', backgroundColor: '#006a4e', color: '#ffffff', border: 'none',
+                                                borderRadius: '6px', padding: '12px', cursor: 'pointer', fontWeight: 'bold'
+                                            }}
+                                        >
+                                            Crea Conto in Sospeso
+                                        </button>
+                                    </div>
+                                )}
+
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                                    <button
+                                        onClick={() => { setIsCreateModalOpen(false); setSearchResult(null); setSearchEmail(''); setSearchError(''); setPendingEmailInvite(''); setShowInviteSuccess(false); }}
+                                        style={{ backgroundColor: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '8px 16px' }}
+                                    >
+                                        Annulla
+                                    </button>
                                 </div>
-                                <div style={{ flex: 1 }}>
-                                    <p style={{ margin: 0, fontWeight: 'bold', color: '#006a4e' }}>{searchResult.displayName}</p>
-                                    <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)' }}>Trovato!</p>
+                            </>
+                        ) : (
+                            <div style={{ textAlign: 'center' }}>
+                                <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#e2f5ee', color: '#006a4e', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto' }}>
+                                    <Users size={32} />
+                                </div>
+                                <h2 style={{ margin: '0 0 10px', color: 'var(--text-primary)', fontSize: '22px' }}>Conto Creato! 🎉</h2>
+                                <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', lineHeight: 1.5 }}>
+                                    Il conto con l'ospite <strong>{pendingEmailInvite}</strong> è pronto! Ora inserisci le tue spese.<br /><br />
+                                    Per far iscrivere l'utente al volo, copia l'invito qui sotto e inviaglielo su <strong>WhatsApp</strong>, Telegram o Email!
+                                </p>
+                                <div style={{ padding: '15px', backgroundColor: 'var(--bg-secondary)', border: '1px dashed var(--border-color)', borderRadius: '8px', color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '20px', textAlign: 'left', fontStyle: 'italic' }}>
+                                    "Ciao! Ti ho aggiunto a un conto per le nostre spese su Shongjog. Iscriviti subito con la tua email {pendingEmailInvite} qui: https://shongjog.it/tools"
                                 </div>
                                 <button
-                                    onClick={handleCreateAccount}
+                                    onClick={copyInviteText}
                                     style={{
-                                        backgroundColor: '#006a4e', color: '#ffffff', border: 'none',
-                                        borderRadius: '6px', padding: '8px 16px', cursor: 'pointer', fontWeight: 'bold'
+                                        width: '100%', backgroundColor: '#006a4e', color: '#ffffff', border: 'none',
+                                        borderRadius: '8px', padding: '14px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px', marginBottom: '12px'
                                     }}
                                 >
-                                    Crea
+                                    Copia Messaggio d'Invito
+                                </button>
+                                <button
+                                    onClick={() => { setIsCreateModalOpen(false); setSearchResult(null); setSearchEmail(''); setPendingEmailInvite(''); setShowInviteSuccess(false); }}
+                                    style={{ backgroundColor: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '8px 16px', fontWeight: '500' }}
+                                >
+                                    Chiudi e Inizia a Inserire Spese
                                 </button>
                             </div>
                         )}
-
-                        {pendingEmailInvite && (
-                            <div style={{
-                                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px',
-                                padding: '16px', marginBottom: '20px', textAlign: 'center'
-                            }}>
-                                <p style={{ margin: '0 0 12px 0', color: 'var(--text-primary)', fontSize: '15px' }}>
-                                    <strong>{pendingEmailInvite}</strong> non è ancora registrato su Shongjog.
-                                </p>
-                                <p style={{ margin: '0 0 16px 0', color: 'var(--text-secondary)', fontSize: '14px' }}>
-                                    Puoi creare il conto in sospeso e inviargli una email. Appena si registrerà, il conto verrà attivato automaticamente per entrambi!
-                                </p>
-                                <button
-                                    onClick={handleCreatePendingAccount}
-                                    style={{
-                                        width: '100%', backgroundColor: '#006a4e', color: 'white', border: 'none',
-                                        borderRadius: '6px', padding: '12px', cursor: 'pointer', fontWeight: 'bold'
-                                    }}
-                                >
-                                    Crea Conto e Invia Invito Email
-                                </button>
-                            </div>
-                        )}
-
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
-                            <button
-                                onClick={() => { setIsCreateModalOpen(false); setSearchResult(null); setSearchEmail(''); setSearchError(''); setPendingEmailInvite(''); }}
-                                style={{ backgroundColor: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '8px 16px' }}
-                            >
-                                Annulla
-                            </button>
-                        </div>
                     </div>
                 </div>
             )}
