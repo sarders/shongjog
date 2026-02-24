@@ -15,6 +15,7 @@ const SharedExpensesPage = () => {
     const [searchEmail, setSearchEmail] = useState('');
     const [searchResult, setSearchResult] = useState(null);
     const [searchError, setSearchError] = useState('');
+    const [pendingEmailInvite, setPendingEmailInvite] = useState('');
 
     useEffect(() => {
         if (!currentUser) return;
@@ -56,6 +57,7 @@ const SharedExpensesPage = () => {
         e.preventDefault();
         setSearchError('');
         setSearchResult(null);
+        setPendingEmailInvite('');
 
         if (searchEmail.toLowerCase() === currentUser.email.toLowerCase()) {
             setSearchError("Non puoi creare un conto con te stesso!");
@@ -68,7 +70,7 @@ const SharedExpensesPage = () => {
             const snapshot = await getDocs(q);
 
             if (snapshot.empty) {
-                setSearchError("Nessun utente trovato con questa email. Assicurati che si sia già registrato al sito.");
+                setPendingEmailInvite(searchEmail.toLowerCase());
             } else {
                 setSearchResult(snapshot.docs[0].data());
             }
@@ -108,6 +110,50 @@ const SharedExpensesPage = () => {
         } catch (error) {
             console.error("Errore nella creazione del conto:", error);
             alert("Errore durante la creazione del conto condiviso.");
+        }
+    };
+
+    const handleCreatePendingAccount = async () => {
+        if (!pendingEmailInvite) return;
+
+        try {
+            const newAccount = {
+                members: [currentUser.uid], // Solo io sono il membro effettivo per ora
+                pendingEmail: pendingEmailInvite,
+                memberDetails: {
+                    [currentUser.uid]: {
+                        displayName: currentUser.displayName,
+                        email: currentUser.email,
+                        photoURL: currentUser.photoURL || null
+                    },
+                    [`pending_${pendingEmailInvite}`]: {
+                        displayName: "In attesa di registrazione",
+                        email: pendingEmailInvite,
+                        isPending: true
+                    }
+                },
+                createdAt: serverTimestamp()
+            };
+
+            await addDoc(collection(db, 'sharedAccounts'), newAccount);
+
+            // Genera il link mailto
+            const subject = encodeURIComponent("Unisciti a me su Shongjog per le Spese Condivise!");
+            const body = encodeURIComponent(
+                `Ciao!\n\nTi ho appena aggiunto a un conto per tracciare le nostre spese condivise su Shongjog.\n\n` +
+                `Per vedere il conto e aggiungere le tue spese, effettua l'accesso con Google da qui:\n` +
+                `https://shongjog.it/tools\n\n` +
+                `A presto!\n${currentUser.displayName}`
+            );
+            window.location.href = `mailto:${pendingEmailInvite}?subject=${subject}&body=${body}`;
+
+            setIsCreateModalOpen(false);
+            setSearchEmail('');
+            setPendingEmailInvite('');
+            fetchAccounts();
+        } catch (error) {
+            console.error("Errore nella creazione del conto in attesa:", error);
+            alert("Errore durante la creazione del conto in attesa.");
         }
     };
 
@@ -158,8 +204,16 @@ const SharedExpensesPage = () => {
                 <div style={{ display: 'grid', gap: '16px' }}>
                     {accounts.map(acc => {
                         // Trova chi è l'altro utente nel conto
-                        const otherUserId = acc.members.find(id => id !== currentUser.uid);
-                        const otherUser = acc.memberDetails[otherUserId];
+                        let otherUser = null;
+
+                        if (acc.members.length === 1 && acc.pendingEmail) {
+                            // È un conto in attesa
+                            otherUser = acc.memberDetails[`pending_${acc.pendingEmail}`];
+                        } else {
+                            // È un conto attivo
+                            const otherUserId = acc.members.find(id => id !== currentUser.uid);
+                            otherUser = acc.memberDetails[otherUserId];
+                        }
 
                         return (
                             <Link
@@ -193,8 +247,12 @@ const SharedExpensesPage = () => {
                                         )}
                                     </div>
                                     <div>
-                                        <h3 style={{ margin: 0, fontSize: '18px', color: 'var(--text-primary)' }}>Conto con {otherUser?.displayName?.split(' ')[0] || 'Utente'}</h3>
-                                        <p style={{ margin: '4px 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>{otherUser?.email}</p>
+                                        <h3 style={{ margin: 0, fontSize: '18px', color: 'var(--text-primary)' }}>
+                                            Conto con {otherUser?.isPending ? otherUser.email : (otherUser?.displayName?.split(' ')[0] || 'Utente')}
+                                        </h3>
+                                        <p style={{ margin: '4px 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>
+                                            {otherUser?.isPending ? 'In attesa di registrazione...' : otherUser?.email}
+                                        </p>
                                     </div>
                                 </div>
                                 <ArrowRight color="#ccc" />
@@ -265,9 +323,32 @@ const SharedExpensesPage = () => {
                             </div>
                         )}
 
+                        {pendingEmailInvite && (
+                            <div style={{
+                                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px',
+                                padding: '16px', marginBottom: '20px', textAlign: 'center'
+                            }}>
+                                <p style={{ margin: '0 0 12px 0', color: 'var(--text-primary)', fontSize: '15px' }}>
+                                    <strong>{pendingEmailInvite}</strong> non è ancora registrato su Shongjog.
+                                </p>
+                                <p style={{ margin: '0 0 16px 0', color: 'var(--text-secondary)', fontSize: '14px' }}>
+                                    Puoi creare il conto in sospeso e inviargli una email. Appena si registrerà, il conto verrà attivato automaticamente per entrambi!
+                                </p>
+                                <button
+                                    onClick={handleCreatePendingAccount}
+                                    style={{
+                                        width: '100%', backgroundColor: '#006a4e', color: 'white', border: 'none',
+                                        borderRadius: '6px', padding: '12px', cursor: 'pointer', fontWeight: 'bold'
+                                    }}
+                                >
+                                    Crea Conto e Invia Invito Email
+                                </button>
+                            </div>
+                        )}
+
                         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
                             <button
-                                onClick={() => { setIsCreateModalOpen(false); setSearchResult(null); setSearchEmail(''); setSearchError(''); }}
+                                onClick={() => { setIsCreateModalOpen(false); setSearchResult(null); setSearchEmail(''); setSearchError(''); setPendingEmailInvite(''); }}
                                 style={{ backgroundColor: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '8px 16px' }}
                             >
                                 Annulla

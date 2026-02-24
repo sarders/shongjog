@@ -103,8 +103,16 @@ const SharedAccountDetail = () => {
     }
 
     // Calcolo debiti
-    const otherUserId = account.members.find(uid => uid !== currentUser.uid);
-    const otherUser = account.memberDetails[otherUserId];
+    let otherUser = null;
+    let otherUserId = null;
+
+    if (account.members.length === 1 && account.pendingEmail) {
+        otherUser = account.memberDetails[`pending_${account.pendingEmail}`];
+        otherUserId = `pending_${account.pendingEmail}`; // Uso id fittizio per tracciare
+    } else {
+        otherUserId = account.members.find(uid => uid !== currentUser.uid);
+        otherUser = account.memberDetails[otherUserId];
+    }
 
 
     let myTotal = 0;
@@ -149,9 +157,10 @@ const SharedAccountDetail = () => {
                 backgroundColor: 'var(--bg-primary)', borderRadius: '16px', overflow: 'hidden',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.08)', marginBottom: '30px'
             }}>
-                <div style={{ backgroundColor: '#006a4e', padding: '30px 20px', color: '#ffffff', textAlign: 'center' }}>
+                <div style={{ backgroundColor: '#006a4e', padding: '30px 20px', color: 'white', textAlign: 'center' }}>
                     <h1 style={{ margin: '0 0 10px', fontSize: '24px' }}>
-                        Conto con {otherUser.displayName}
+                        Conto con {otherUser?.isPending ? otherUser.email : otherUser.displayName}
+                        {otherUser?.isPending && <span style={{ fontSize: '14px', fontWeight: 'normal', opacity: 0.8, display: 'block', marginTop: '4px' }}>(In attesa di registrazione...)</span>}
                     </h1>
                     <div style={{
                         display: 'inline-flex', alignItems: 'center', gap: '10px',
@@ -168,7 +177,9 @@ const SharedAccountDetail = () => {
                         <p style={{ margin: 0, fontSize: '24px', fontWeight: 'bold', color: 'var(--text-primary)' }}>{myTotal.toFixed(2)}€</p>
                     </div>
                     <div style={{ flex: 1, padding: '20px', textAlign: 'center' }}>
-                        <p style={{ margin: '0 0 5px', color: 'var(--text-secondary)', fontSize: '14px' }}>{otherUser.displayName.split(' ')[0]} ha pagato</p>
+                        <p style={{ margin: '0 0 5px', color: 'var(--text-secondary)', fontSize: '14px' }}>
+                            {otherUser?.isPending ? 'Invitato ha pagato' : `${otherUser.displayName.split(' ')[0]} ha pagato`}
+                        </p>
                         <p style={{ margin: 0, fontSize: '24px', fontWeight: 'bold', color: 'var(--text-primary)' }}>{otherTotal.toFixed(2)}€</p>
                     </div>
                 </div>
@@ -227,7 +238,7 @@ const SharedAccountDetail = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {expenses.map(exp => {
                         const isMine = exp.paidBy === currentUser.uid;
-                        const payer = isMine ? 'Tu' : otherUser.displayName.split(' ')[0];
+                        const payer = isMine ? 'Tu' : (otherUser?.isPending ? otherUser.email : otherUser.displayName.split(' ')[0]);
 
                         return (
                             <div key={exp.id} style={{
