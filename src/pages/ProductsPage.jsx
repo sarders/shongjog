@@ -1,76 +1,84 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Section from '../components/common/Section';
-import { Users } from 'lucide-react';
+import { Home, Banknote, TrendingUp, Calculator, Cloud } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import QuickNav from '../components/common/QuickNav';
-import NetSalaryCalculator from '../components/tools/NetSalaryCalculator';
-import ExpenseSplitter from '../components/tools/ExpenseSplitter';
-import CompoundInterestCalculator from '../components/tools/CompoundInterestCalculator';
-import RoomRentalCalculator from '../components/tools/RoomRentalCalculator';
+import './ProductsPage.css';
 
 const ProductsPage = () => {
     const { currentUser, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const handleCloudToolClick = async (e) => {
+        if (!currentUser) {
+            e.preventDefault();
+            if (window.confirm("Per accedere a Spese Condivise è necessario prima effettuare l'accesso.\n\nVuoi accedere ora con Google?")) {
+                try {
+                    await loginWithGoogle();
+                    navigate('/shared-expenses');
+                } catch (error) {
+                    console.error("Errore di login:", error);
+                }
+            }
+        }
+    };
+
     return (
-        <div className="products-page">
-            <Section id="tools-intro" title="Strumenti Utili" className="section-compact">
-                <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', color: 'var(--text-secondary)' }}>
-                    Una raccolta di calcolatori e utility digitali progettati per semplificare la gestione quotidiana delle finanze e della vita in comune.
-                </p>
+        <div className="tools-dashboard">
+            <header className="tools-header">
+                <h1>Strumenti</h1>
+                <p>Una suite di utility digitali progettate con eleganza per semplificarti la vita, gestire le tue finanze e organizzare la convivenza in Italia.</p>
+            </header>
 
-                {/* Banner per il nuovo strumento Cloud / Autenticato */}
-                <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center' }}>
-                    {currentUser ? (
-                        <Link to="/shared-expenses" style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '12px',
-                            backgroundColor: '#006a4e', color: 'white', padding: '16px 32px',
-                            borderRadius: '12px', textDecoration: 'none', fontWeight: 'bold', fontSize: '18px',
-                            boxShadow: '0 4px 12px rgba(0, 106, 78, 0.3)', transition: 'transform 0.2s'
-                        }}>
-                            <Users size={24} /> Entra in "Spese Condivise" (Beta)
-                        </Link>
-                    ) : (
-                        <button onClick={async () => {
-                            if (window.confirm("Per usare le Spese Condivise è necessario prima effettuare l'accesso.\n\nVuoi accedere ora con Google?")) {
-                                try {
-                                    await loginWithGoogle();
-                                    navigate('/shared-expenses');
-                                } catch (error) {
-                                    // Errore già loggato o gestito in AuthContext, mostra avviso generico
-                                    console.error(error);
-                                }
-                            }
-                        }} style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '12px',
-                            backgroundColor: '#006a4e', color: 'white', padding: '16px 32px',
-                            borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', fontSize: '18px',
-                            boxShadow: '0 4px 12px rgba(0, 106, 78, 0.3)', transition: 'transform 0.2s',
-                            fontFamily: 'inherit'
-                        }}>
-                            <Users size={24} /> Entra in "Spese Condivise" (Beta)
-                        </button>
-                    )}
-                </div>
-            </Section>
+            <div className="tools-grid">
 
-            <QuickNav />
+                {/* Strumento Cloud Premium */}
+                <Link to="/shared-expenses" className="tool-card premium" onClick={handleCloudToolClick}>
+                    <div className="tool-badge">Cloud Sync</div>
+                    <div className="tool-icon-wrapper">
+                        <Cloud size={32} />
+                    </div>
+                    <h2>Spese Condivise</h2>
+                    <p>Crea un conto in tempo reale con i tuoi amici. Tieni traccia di tutte le spese e scopri automaticamente chi deve cosa a chi senza fare matematica.</p>
+                </Link>
 
-            <Section id="room-rental-calculator" title="Calcolatore Affitto Posto Letto">
-                <RoomRentalCalculator />
-            </Section>
+                {/* Strumenti Locali */}
+                <Link to="/tools/net-salary" className="tool-card">
+                    <div className="tool-icon-wrapper">
+                        <Banknote size={32} />
+                    </div>
+                    <h2>Stipendio Netto</h2>
+                    <p>Calcola il tuo stipendio mensile reale partendo dalla RAL. Scopri l'impatto di tasse, IRPEF e detrazioni secondo il sistema fiscale italiano.</p>
+                </Link>
 
-            <Section id="salary-calculator" title="Calcolo Stipendio Netto">
-                <NetSalaryCalculator />
-            </Section>
+                <Link to="/tools/room-rental" className="tool-card">
+                    <div className="tool-icon-wrapper">
+                        <Home size={32} />
+                    </div>
+                    <h2>Affitto Posto Letto</h2>
+                    <p>Condividi casa? Calcola rapidamente quanto ogni conquilino dovrebbe pagare d'affitto basandoti sulla dimensione della stanza e sugli spazi comuni.</p>
+                </Link>
 
-            <Section id="interest-calculator" title="Calcolatore Interesse Composto">
-                <CompoundInterestCalculator />
-            </Section>
+                <Link to="/tools/compound-interest" className="tool-card">
+                    <div className="tool-icon-wrapper">
+                        <TrendingUp size={32} />
+                    </div>
+                    <h2>Interesse Composto</h2>
+                    <p>Proietta i tuoi investimenti nel futuro. Scopri come i tuoi risparmi e versamenti mensili possono crescere esponenzialmente nel tempo.</p>
+                </Link>
 
-            <Section id="expense-splitter" title="Gestione Spese Casa">
-                <ExpenseSplitter />
-            </Section>
+                <Link to="/tools/expense-splitter" className="tool-card">
+                    <div className="tool-icon-wrapper">
+                        <Calculator size={32} />
+                    </div>
+                    <h2>Split Spese Rapido</h2>
+                    <p>Strumento semplice e offline per calcolare in volo chi deve rimborsare chi, ideale per un ristorante o spese di viaggio passeggere.</p>
+                </Link>
+
+            </div>
         </div>
     );
 };
