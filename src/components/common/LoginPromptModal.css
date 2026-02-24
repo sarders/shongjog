@@ -16,7 +16,7 @@
 }
 
 .modal-content {
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
     border-radius: 24px;
     width: 100%;
     max-width: 420px;
@@ -43,14 +43,14 @@
 .modal-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin: 0 0 12px 0;
     letter-spacing: -0.02em;
 }
 
 .modal-description {
     font-size: 1rem;
-    color: #666;
+    color: var(--text-secondary);
     line-height: 1.5;
     margin: 0 0 32px 0;
 }
@@ -89,7 +89,7 @@
 
 .btn-secondary {
     background-color: transparent;
-    color: #666;
+    color: var(--text-secondary);
     border: none;
     padding: 14px;
     font-size: 1rem;
@@ -100,7 +100,7 @@
 }
 
 .btn-secondary:hover {
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 @keyframes fadeIn {

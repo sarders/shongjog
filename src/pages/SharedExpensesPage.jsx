@@ -120,12 +120,12 @@ const SharedExpensesPage = () => {
                     <h1 style={{ margin: 0, fontSize: '28px', color: '#006a4e', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <Users size={32} /> Spese Condivise
                     </h1>
-                    <p style={{ margin: '5px 0 0', color: '#666' }}>Tieni traccia di chi deve cosa a chi.</p>
+                    <p style={{ margin: '5px 0 0', color: 'var(--text-secondary)' }}>Tieni traccia di chi deve cosa a chi.</p>
                 </div>
                 <button
                     onClick={() => setIsCreateModalOpen(true)}
                     style={{
-                        backgroundColor: '#006a4e', color: 'white', border: 'none',
+                        backgroundColor: '#006a4e', color: '#ffffff', border: 'none',
                         padding: '12px 20px', borderRadius: '8px', cursor: 'pointer',
                         display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold'
                     }}
@@ -138,16 +138,16 @@ const SharedExpensesPage = () => {
                 <div style={{ textAlign: 'center', padding: '40px' }}>Caricamento in corso...</div>
             ) : accounts.length === 0 ? (
                 <div style={{
-                    backgroundColor: '#f9f9f9', border: '1px dashed #ccc', borderRadius: '12px',
+                    backgroundColor: 'var(--bg-secondary)', border: '1px dashed var(--border-color)', borderRadius: '12px',
                     padding: '60px 20px', textAlign: 'center'
                 }}>
                     <Users size={48} color="#006a4e" style={{ opacity: 0.5, marginBottom: '16px' }} />
-                    <h3 style={{ margin: '0 0 10px', color: '#333' }}>Nessun conto condiviso</h3>
-                    <p style={{ color: '#666', marginBottom: '20px' }}>Cerca un amico tramite la sua email per iniziare.</p>
+                    <h3 style={{ margin: '0 0 10px', color: 'var(--text-primary)' }}>Nessun conto condiviso</h3>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>Cerca un amico tramite la sua email per iniziare.</p>
                     <button
                         onClick={() => setIsCreateModalOpen(true)}
                         style={{
-                            backgroundColor: 'white', color: '#006a4e', border: '2px solid #006a4e',
+                            backgroundColor: 'var(--bg-primary)', color: '#006a4e', border: '2px solid #006a4e',
                             padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold'
                         }}
                     >
@@ -167,9 +167,9 @@ const SharedExpensesPage = () => {
                                 key={acc.id}
                                 style={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                                    backgroundColor: 'white', padding: '20px', borderRadius: '12px',
+                                    backgroundColor: 'var(--bg-primary)', padding: '20px', borderRadius: '12px',
                                     boxShadow: '0 2px 8px rgba(0,0,0,0.05)', textDecoration: 'none', color: 'inherit',
-                                    border: '1px solid #eee', transition: 'transform 0.2s, box-shadow 0.2s'
+                                    border: '1px solid var(--border-color)', transition: 'transform 0.2s, box-shadow 0.2s'
                                 }}
                                 onMouseOver={e => {
                                     e.currentTarget.style.transform = 'translateY(-2px)';
@@ -193,8 +193,8 @@ const SharedExpensesPage = () => {
                                         )}
                                     </div>
                                     <div>
-                                        <h3 style={{ margin: 0, fontSize: '18px', color: '#333' }}>Conto con {otherUser?.displayName?.split(' ')[0] || 'Utente'}</h3>
-                                        <p style={{ margin: '4px 0 0', fontSize: '14px', color: '#777' }}>{otherUser?.email}</p>
+                                        <h3 style={{ margin: 0, fontSize: '18px', color: 'var(--text-primary)' }}>Conto con {otherUser?.displayName?.split(' ')[0] || 'Utente'}</h3>
+                                        <p style={{ margin: '4px 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>{otherUser?.email}</p>
                                     </div>
                                 </div>
                                 <ArrowRight color="#ccc" />
@@ -208,16 +208,16 @@ const SharedExpensesPage = () => {
             {isCreateModalOpen && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center',
+                    backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center',
                     justifyContent: 'center', zIndex: 1100, padding: '20px'
                 }}>
                     <div style={{
-                        backgroundColor: 'white', borderRadius: '16px', padding: '30px',
+                        backgroundColor: 'var(--bg-primary)', borderRadius: '16px', padding: '30px',
                         width: '100%', maxWidth: '400px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
                     }}>
-                        <h2 style={{ margin: '0 0 20px', color: '#333', fontSize: '20px' }}>Nuovo Conto Condiviso</h2>
+                        <h2 style={{ margin: '0 0 20px', color: 'var(--text-primary)', fontSize: '20px' }}>Nuovo Conto Condiviso</h2>
                         <form onSubmit={handleSearchUser}>
-                            <label style={{ display: 'block', marginBottom: '8px', color: '#555', fontSize: '14px' }}>
+                            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '14px' }}>
                                 Email dell'utente con cui condividere le spese:
                             </label>
                             <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
@@ -228,11 +228,11 @@ const SharedExpensesPage = () => {
                                     placeholder="email@esempio.com"
                                     required
                                     style={{
-                                        flex: 1, padding: '10px 12px', border: '1px solid #ccc', borderRadius: '8px', fontSize: '16px'
+                                        flex: 1, padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '16px'
                                     }}
                                 />
                                 <button type="submit" style={{
-                                    backgroundColor: '#f0f0f0', border: 'none', borderRadius: '8px', padding: '0 16px', cursor: 'pointer'
+                                    backgroundColor: 'var(--bg-secondary)', border: 'none', borderRadius: '8px', padding: '0 16px', cursor: 'pointer'
                                 }}>
                                     <Search size={20} color="#555" />
                                 </button>
@@ -246,17 +246,17 @@ const SharedExpensesPage = () => {
                                 backgroundColor: '#f0f9f6', border: '1px solid #cce8de', borderRadius: '8px',
                                 padding: '16px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px'
                             }}>
-                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#006a4e', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#006a4e', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                                     {searchResult.photoURL ? <img src={searchResult.photoURL} alt="" style={{ width: '100%', height: '100%' }} /> : <UserPlus size={20} />}
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <p style={{ margin: 0, fontWeight: 'bold', color: '#006a4e' }}>{searchResult.displayName}</p>
-                                    <p style={{ margin: 0, fontSize: '12px', color: '#666' }}>Trovato!</p>
+                                    <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)' }}>Trovato!</p>
                                 </div>
                                 <button
                                     onClick={handleCreateAccount}
                                     style={{
-                                        backgroundColor: '#006a4e', color: 'white', border: 'none',
+                                        backgroundColor: '#006a4e', color: '#ffffff', border: 'none',
                                         borderRadius: '6px', padding: '8px 16px', cursor: 'pointer', fontWeight: 'bold'
                                     }}
                                 >
@@ -268,7 +268,7 @@ const SharedExpensesPage = () => {
                         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
                             <button
                                 onClick={() => { setIsCreateModalOpen(false); setSearchResult(null); setSearchEmail(''); setSearchError(''); }}
-                                style={{ backgroundColor: 'transparent', border: 'none', color: '#666', cursor: 'pointer', padding: '8px 16px' }}
+                                style={{ backgroundColor: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '8px 16px' }}
                             >
                                 Annulla
                             </button>

@@ -11,7 +11,7 @@
 
 .tools-header h1 {
     font-size: 3rem;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin: 0 0 16px 0;
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -19,7 +19,7 @@
 
 .tools-header p {
     font-size: 1.25rem;
-    color: #666;
+    color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.5;
@@ -32,7 +32,7 @@
 }
 
 .tool-card {
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
     border-radius: 24px;
     padding: 40px;
     text-decoration: none;
@@ -42,7 +42,7 @@
     align-items: flex-start;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
 }
@@ -60,8 +60,8 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 24px;
-    background-color: #f5f5f7;
-    color: #1a1a1a;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     transition: transform 0.3s ease;
 }
 
@@ -82,12 +82,12 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0 0 12px 0;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
 .tool-card p {
     font-size: 1rem;
-    color: #666;
+    color: var(--text-secondary);
     line-height: 1.5;
     margin: 0;
     flex-grow: 1;
