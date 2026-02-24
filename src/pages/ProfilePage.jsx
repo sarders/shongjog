@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
-import { Navigate } from 'react-router-dom';
-import { LogOut, User as UserIcon, Calendar, Clock } from 'lucide-react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { LogOut, User as UserIcon, Calendar, Clock, ArrowLeft } from 'lucide-react';
 
 const ProfilePage = () => {
     const { currentUser, logout } = useAuth();
     const [loginHistory, setLoginHistory] = useState([]);
     const [loadingHistory, setLoadingHistory] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -78,20 +79,38 @@ const ProfilePage = () => {
             padding: '40px 20px',
             minHeight: '80vh'
         }}>
+            {/* Header / Navigation Navigation */}
+            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <button
+                    onClick={() => navigate(-1)}
+                    style={{
+                        background: 'none', border: 'none', color: 'var(--text-secondary)',
+                        textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px',
+                        cursor: 'pointer', padding: '8px 0', fontSize: '16px', fontWeight: '500', transition: 'color 0.2s'
+                    }}
+                    onMouseOver={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                    onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                >
+                    <ArrowLeft size={20} /> Torna Indietro
+                </button>
+            </div>
+
             <div style={{
-                backgroundColor: '#fff',
-                borderRadius: '12px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                backgroundColor: 'var(--bg-primary)',
+                borderRadius: '24px',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
                 overflow: 'hidden',
-                marginBottom: '32px'
+                marginBottom: '32px',
+                border: '1px solid var(--border-color)'
             }}>
                 <div style={{
                     backgroundColor: '#006a4e',
-                    padding: '30px',
-                    color: 'white',
+                    padding: '40px 30px',
+                    color: '#ffffff',
                     display: 'flex',
+                    flexWrap: 'wrap',
                     alignItems: 'center',
-                    gap: '20px'
+                    gap: '24px'
                 }}>
                     {currentUser.photoURL ? (
                         <img
@@ -135,51 +154,54 @@ const ProfilePage = () => {
                     </button>
                 </div>
 
-                <div style={{ padding: '30px' }}>
-                    <h2 style={{ color: '#333', marginTop: 0, marginBottom: '20px', fontSize: '20px' }}>
+                <div style={{ padding: '30px', backgroundColor: 'var(--bg-primary)' }}>
+                    <h2 style={{ color: 'var(--text-primary)', marginTop: 0, marginBottom: '20px', fontSize: '20px' }}>
                         Cronologia Accessi
                     </h2>
 
                     {loadingHistory ? (
-                        <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
                             Caricamento in corso...
                         </div>
                     ) : loginHistory.length === 0 ? (
-                        <div style={{ textAlign: 'center', padding: '40px', color: '#666', backgroundColor: '#f9f9f9', borderRadius: '8px' }}>
+                        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)', backgroundColor: 'var(--bg-secondary)', borderRadius: '12px', border: '1px dashed var(--border-color)' }}>
                             Nessun accesso registrato.
                         </div>
                     ) : (
-                        <div style={{ border: '1px solid #eee', borderRadius: '8px', overflow: 'hidden' }}>
-                            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                                <thead>
-                                    <tr style={{ backgroundColor: '#f9f9f9', borderBottom: '1px solid #eee' }}>
-                                        <th style={{ padding: '16px', color: '#555', fontWeight: 'bold' }}>Data</th>
-                                        <th style={{ padding: '16px', color: '#555', fontWeight: 'bold' }}>Ora</th>
-                                        <th style={{ padding: '16px', color: '#555', fontWeight: 'bold' }}>Dispositivo/Browser</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {loginHistory.map((login, idx) => (
-                                        <tr key={login.id} style={{
-                                            borderBottom: idx === loginHistory.length - 1 ? 'none' : '1px solid #eee'
-                                        }}>
-                                            <td style={{ padding: '16px', color: '#333', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                <Calendar size={16} color="#006a4e" />
-                                                {login.timestamp ? formatDate(login.timestamp) : 'Ora'}
-                                            </td>
-                                            <td style={{ padding: '16px', color: '#555' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                    <Clock size={16} color="#666" />
-                                                    {login.timestamp ? formatTime(login.timestamp) : 'Caricamento'}
-                                                </div>
-                                            </td>
-                                            <td style={{ padding: '16px', color: '#777', fontSize: '14px' }}>
-                                                Accesso Google ({login.email})
-                                            </td>
+                        <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', overflow: 'hidden' }}>
+                            <div style={{ overflowX: 'auto' }}>
+                                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '500px' }}>
+                                    <thead>
+                                        <tr style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
+                                            <th style={{ padding: '16px 20px', color: 'var(--text-primary)', fontWeight: '600', fontSize: '15px' }}>Data</th>
+                                            <th style={{ padding: '16px 20px', color: 'var(--text-primary)', fontWeight: '600', fontSize: '15px' }}>Ora</th>
+                                            <th style={{ padding: '16px 20px', color: 'var(--text-primary)', fontWeight: '600', fontSize: '15px' }}>Dispositivo/Browser</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {loginHistory.map((login, idx) => (
+                                            <tr key={login.id} style={{
+                                                borderBottom: idx === loginHistory.length - 1 ? 'none' : '1px solid var(--border-color)',
+                                                backgroundColor: 'var(--bg-primary)'
+                                            }}>
+                                                <td style={{ padding: '16px 20px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px' }}>
+                                                    <Calendar size={18} color="var(--accent-color)" />
+                                                    {login.timestamp ? formatDate(login.timestamp) : 'Ora'}
+                                                </td>
+                                                <td style={{ padding: '16px 20px', color: 'var(--text-secondary)', fontSize: '15px' }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                        <Clock size={16} color="var(--text-secondary)" />
+                                                        {login.timestamp ? formatTime(login.timestamp) : 'Caricamento'}
+                                                    </div>
+                                                </td>
+                                                <td style={{ padding: '16px 20px', color: 'var(--text-secondary)', fontSize: '14px' }}>
+                                                    Accesso Google: {login.email}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     )}
                 </div>
